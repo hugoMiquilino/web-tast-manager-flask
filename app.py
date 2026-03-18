@@ -14,5 +14,12 @@ def add():
     tarefas.append({"texto": texto, "feito": False})
     return redirect("/")
 
+@app.route("/done/<int:id>")
+def done(id):
+    tarefas["id"]["feito"] = True
+    return redirect("/")
+
+
+
 if __name__ == "__main__":
     app.run(debug=True)
