@@ -12,23 +12,36 @@ def home():
 
 @app.route("/add", methods=["POST"])
 def add():
-    texto = request.form.get("tarefa", "").strip()
+    try:
+        texto = request.form.get("tarefa", "").strip()
 
-    if texto:
-        tarefas.append({"texto": texto, "feito": False})
+        if texto:
+            tarefas.append({"texto": texto, "feito": False})
+
+    except Exception:
+        pass
 
     return redirect("/")
 
 
 @app.route("/done/<int:id>")
 def done(id):
-    tarefas[id]["feito"] = True
+    try:
+        tarefas[id]["feito"] = True
+
+    except IndexError:
+        pass
+
     return redirect("/")
 
 
 @app.route("/delete/<int:id>")
 def delete(id):
-    tarefas.pop(id)
+    try:
+        tarefas.pop(id)
+    except IndexError:
+        pass
+
     return redirect("/")
 
 
